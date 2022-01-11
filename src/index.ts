@@ -1,25 +1,11 @@
-import fs from "fs";
-import path from "path";
-import http from "http";
-import config from "./config";
-import AppEvent from "./event";
+import express from "express";
+import userRoute from "./routes/user.routes";
 
-// AppEvent.Db.User.createUser("soho", "shkorea10@as.com").then((res) => {
-//   console.log(res);
-// });
+const server = express();
+server.use(express.json());
 
-// AppEvent.Db.User.readUser(1).then((res) => {
-//   console.log(res);
-// });
-
-// AppEvent.Db.User.updateUser(19, "sookang").then((res) => {
-//   console.log(res);
-// });
-
-// AppEvent.Db.User.deleteUser(19).then((res) => {
-//   console.log(res);
-// });
-
-// AppEvent.Db.User.getAllUsers().then((res) => {
-//   console.log(res);
-// });
+const port = process.env.PORT || 5000;
+server.use("/user", userRoute);
+server.listen(port, () => {
+  console.log(`server started on ${port}`);
+});
